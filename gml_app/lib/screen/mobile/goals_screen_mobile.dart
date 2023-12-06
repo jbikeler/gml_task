@@ -4,12 +4,19 @@ import 'package:gml_app/widgets/mobile/taskcard_widget_mobile.dart';
 import 'package:gml_app/widgets/mobile/taskform_widget_mobile.dart';
 import 'package:provider/provider.dart';
 
-class HomeMobile extends StatelessWidget {
-  const HomeMobile({super.key});
+class GoalsMobile extends StatelessWidget {
+  const GoalsMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('G O A L S',
+        style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 17, 3, 24),
+      ),
       backgroundColor: const Color.fromARGB(255, 17, 3, 24),
       body: const SafeArea(
         child: Column(
@@ -17,11 +24,36 @@ class HomeMobile extends StatelessWidget {
             SizedBox(
               height: 120,
               child: Center(
-                child: Text("Tasks:",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                ),),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.stars,
+                    color: Colors.amber,
+                    size: 40,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("POINTS:",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("125",
+                      style: TextStyle(
+                        color: Colors.amber,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -65,7 +97,9 @@ class HomeMobile extends StatelessWidget {
                 width: 40,
                 child: IconButton(
                   padding: const EdgeInsets.all(0.0),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(
                     Icons.done_all,
                     color: Colors.white,

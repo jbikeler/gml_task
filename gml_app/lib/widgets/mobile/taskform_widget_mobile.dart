@@ -46,10 +46,27 @@ class TaskForm extends StatelessWidget {
           ),
         ),
       ),
+      actionsAlignment: MainAxisAlignment.center,
       actions: [
+        TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 222, 112, 148),
+            ),
+            child: const Text("Cancel",
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+        ),
         Consumer(
-          builder: (context, value, child) => ElevatedButton(
-            child: const Text("Create Task"),
+          builder: (context, value, child) => TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 70, 195, 128),
+            ),
+            child: const Text("Create",
+              style: TextStyle(color: Colors.white),
+            ),
             onPressed: () {
               createTask(context);
             },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gml_app/providers/tasks_provider.dart';
-import 'package:gml_app/screen/home_screen_mobile.dart';
+import 'package:gml_app/screen/mobile/goals_screen_mobile.dart';
+import 'package:gml_app/screen/mobile/home_screen_mobile.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,7 +22,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeMobile(),
+      initialRoute: "/",
+      routes: {
+        '/': (context) => const HomeMobile(),
+        '/goals': (context) => const GoalsMobile(),
+      }
     );
   }
 }
