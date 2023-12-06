@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build_runner",
+            "type": "shell",
+            "command": "dart run build_runner build",
+            "options": {
+                "cwd": "${workspaceFolder}/gml_app/"
+            },
+            "presentation": {"echo": true, "reveal": "always", "focus": false, "panel": "shared", "showReuseMessage": false, "clear": true},
+        },
+        {
+            "label": "build_runner watch",
+            "type": "shell",
+            "command": "dart run build_runner watch",
+            "options": {
+                "cwd": "${workspaceFolder}/gml_app/"
+            },
+            "presentation": {"echo": true, "reveal": "always", "focus": false, "panel": "shared", "showReuseMessage": false, "clear": true},
+        },
+        {
+            "label": "get dependencies",
+            "type": "shell",
+            "command": "flutter pub get",
+            "options": {
+                "cwd": "${workspaceFolder}/gml_app/"
+            },
+            "presentation": {"echo": true, "reveal": "always", "focus": false, "panel": "shared", "showReuseMessage": false, "clear": true},
+        },
+    ]
+}
