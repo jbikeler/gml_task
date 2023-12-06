@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gml_app/providers/tasks_provider.dart';
+import 'package:gml_app/providers/goals_provider.dart';
 import 'package:provider/provider.dart';
 
-class TaskForm extends StatelessWidget {
-  TaskForm({super.key});
+class GoalForm extends StatelessWidget {
+  GoalForm({super.key});
 
   final nameController = TextEditingController();
   final pointsController = TextEditingController();
 
-  void createTask(BuildContext context){
-    context.read<TasksProvider>().addTask(nameController.text, int.parse(pointsController.text));
+  void createGoal(BuildContext context){
+    context.read<GoalsProvider>().addGoal(nameController.text, int.parse(pointsController.text));
     Navigator.of(context).pop();
     nameController.clear();
     pointsController.clear();
@@ -20,7 +20,7 @@ class TaskForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      title: const Text('New Task'),
+      title: const Text('New Goal'),
       content: Center(
         child: Padding(
           padding: const EdgeInsets.all(8),
@@ -29,7 +29,7 @@ class TaskForm extends StatelessWidget {
               TextFormField(
                 controller: nameController,
                 decoration: const InputDecoration(
-                  labelText: "Task Name",
+                  labelText: "Goal Name",
                   icon: Icon(Icons.task),
                 ),
               ),
@@ -68,7 +68,7 @@ class TaskForm extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () {
-              createTask(context);
+              createGoal(context);
             },
           ),
         ),

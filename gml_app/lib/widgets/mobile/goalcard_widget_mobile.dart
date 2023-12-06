@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:gml_app/providers/tasks_provider.dart';
+import 'package:gml_app/providers/goals_provider.dart';
 import 'package:gml_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-class TaskCard extends StatelessWidget {
+class GoalCard extends StatelessWidget {
 
-  int taskId = 0;
+  int goalId = 0;
   String title = "";
   int points = 0;
   
-  TaskCard({super.key, required this.taskId, required this.title, required this.points});
+  GoalCard({super.key, required this.goalId, required this.title, required this.points});
 
   @override
   Widget build(BuildContext context) {
+    //check to see if user has enough points to spend on goal
+    bool canDissmiss = (Provider.of<UserProvider>(context).points >= points) ? true : false;
     return Dismissible(
         onDismissed: (direction) {
-          context.read<UserProvider>().addPoints(points);
-          context.read<TasksProvider>().deleteTask(taskId);
+          context.read<UserProvider>().removePoints(points);
+          context.read<GoalsProvider>().deleteGoal(goalId);
         },
+        //if the user does not have enough point lock the dissmiss direction so they cant delete goal
+        direction: (canDissmiss) ? DismissDirection.horizontal : DismissDirection.none,
         key: UniqueKey(),
         child: Container(
           decoration: const BoxDecoration(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gml_app/providers/tasks_provider.dart';
+import 'package:gml_app/providers/user_provider.dart';
+import 'package:gml_app/widgets/dev_menu.dart';
 import 'package:gml_app/widgets/mobile/taskcard_widget_mobile.dart';
 import 'package:gml_app/widgets/mobile/taskform_widget_mobile.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +20,11 @@ class HomeMobile extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 17, 3, 24),
       ),
       backgroundColor: const Color.fromARGB(255, 17, 3, 24),
-      body: const SafeArea(
+//START Body
+      body: SafeArea(
         child: Column(
           children: [
+//START Points Section
             SizedBox(
               height: 120,
               child: Center(
@@ -28,43 +32,54 @@ class HomeMobile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.stars,
+                    const Icon(Icons.stars,
                     color: Colors.amber,
                     size: 40,
                     ),
-                    SizedBox(
+                    //Spacer
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text("POINTS:",
+                    //'POINTS' Text
+                    const Text("POINTS:",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold
                       ),
                     ),
-                    SizedBox(
+                    //Spacer
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text("125",
-                      style: TextStyle(
-                        color: Colors.amber,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold
+                    //Points amount
+                    Consumer<UserProvider>(
+                      builder: (context, value, child) => Text(value.points.toString(),
+                        style: const TextStyle(
+                          color: Colors.amber,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+//END Points Section
+//START Tasks Section
             Expanded(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: TaskList(),
               )
             ),
+//END Tasks Section
           ]
         ),
       ),
+//END Body
+//START Action Button
       floatingActionButton: SizedBox(
         height: 70,
         width: 70,
@@ -85,12 +100,15 @@ class HomeMobile extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+//END Action Button
+//START Bottom Nav
       bottomNavigationBar: BottomAppBar(
         color: const Color.fromARGB(255, 23, 20, 44),
         shape: const CircularNotchedRectangle(),
         child: SizedBox(
           height: 60.0,
           child: Row(
+//START Tasks Button
             children: [
               SizedBox(
                 height: 40,
@@ -105,9 +123,11 @@ class HomeMobile extends StatelessWidget {
                   ),
                 ),
               ),
+//END Tasks Button
               const SizedBox(
                 width: 20,
               ),
+//START Goals Button
               SizedBox(
                 height: 40,
                 width: 40,
@@ -123,6 +143,32 @@ class HomeMobile extends StatelessWidget {
                   ),
                 ),
               ),
+//END Goals Button
+              const SizedBox(
+                width: 60,
+              ),
+//START Dev Menu
+              SizedBox(
+                height: 40,
+                width: 40,
+                child: IconButton(
+                  padding: const EdgeInsets.all(0.0),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return DevMenu();
+                      }
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.developer_mode,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                ),
+              ),
+//END Dev Menu
             ],
           )
         )
@@ -130,6 +176,7 @@ class HomeMobile extends StatelessWidget {
     );
   }
 }
+//END Bottom Nav
 
 
 class TaskList extends StatelessWidget {
