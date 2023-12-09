@@ -68,7 +68,7 @@ class HomeMobile extends StatelessWidget {
             ),
 //END Points Section
 //START Tasks Section
-            Expanded(
+            const Expanded(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: TaskList(),

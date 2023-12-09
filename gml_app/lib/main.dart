@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gml_app/data/database.dart';
 import 'package:gml_app/providers/goals_provider.dart';
 import 'package:gml_app/providers/tasks_provider.dart';
 import 'package:gml_app/providers/user_provider.dart';
@@ -13,6 +14,10 @@ void main() {
         ChangeNotifierProvider(create: (_) => TasksProvider()),
         ChangeNotifierProvider(create: (_) => GoalsProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        Provider(
+          create: (_) => AppDatabase(),
+          dispose: (context, AppDatabase db) => db.close(),
+        ),
       ],
     child: const MyApp()
   ));

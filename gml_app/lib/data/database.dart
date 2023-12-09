@@ -15,7 +15,32 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   @override
   int get schemaVersion => 1;
+
+  Future<List<TaskItem>> getTasks() async {
+    return await select(taskItems).get();
+  }
+
+  Future<TaskItem> getTaskItem(int id) async {
+    return await (select(taskItems)..where((tbl) => tbl.id.equals(id))).getSingle();
+  }
+
+  Future<bool> updateTask(TaskItemsCompanion entity) async {
+  return await update(taskItems).replace(entity);
+  }
+
+  Future<int> addTask(TaskItemsCompanion entry) async {
+  return await into(taskItems).insert(entry);
+  }
+  
+  Future<int> deleteTask(int id) async {
+  return await (delete(taskItems)..where((tbl) => tbl.id.equals(id))).go();
+  }
+
+
+
+  
 }
+
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
