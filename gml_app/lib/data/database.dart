@@ -20,6 +20,10 @@ class AppDatabase extends _$AppDatabase {
     return await select(taskItems).get();
   }
 
+  Stream<List<TaskItem>> getTasksStream() {
+    return select(taskItems).watch();
+  }
+
   Future<TaskItem> getTaskItem(int id) async {
     return await (select(taskItems)..where((tbl) => tbl.id.equals(id))).getSingle();
   }
@@ -35,9 +39,6 @@ class AppDatabase extends _$AppDatabase {
   Future<int> deleteTask(int id) async {
   return await (delete(taskItems)..where((tbl) => tbl.id.equals(id))).go();
   }
-
-
-
   
 }
 

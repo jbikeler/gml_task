@@ -10,10 +10,14 @@ class TaskForm extends StatelessWidget {
   final pointsController = TextEditingController();
 
   void createTask(BuildContext context){
-    context.read<TasksProvider>().addTask(nameController.text, int.parse(pointsController.text));
+    context.read<TasksProvider>().addTask((nameController.text != '') ? nameController.text : 'New Task', (pointsController.text != '') ? int.parse(pointsController.text) : 10 ); //if either of the inputs are empty just fill in defaults
     Navigator.of(context).pop();
     nameController.clear();
     pointsController.clear();
+  }
+
+  void deleteTask(BuildContext context){
+    print("need delete logic: taskform_widget_mobile.dart -> deleteTask()");
   }
  
   @override
@@ -31,6 +35,7 @@ class TaskForm extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: "Task Name",
                   icon: Icon(Icons.task),
+                  hintText: 'New Task',
                 ),
               ),
               TextFormField(
@@ -38,8 +43,12 @@ class TaskForm extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: "Points",
                   icon: Icon(Icons.star),
+                  hintText: "10",
                 ),
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(4),
+                ],
                 keyboardType: TextInputType.number,
               ),
             ],

@@ -29,59 +29,47 @@ class GoalCard extends StatelessWidget {
             color: Color.fromARGB(255, 23, 20, 44)
           ),
           height: 60.0,
-          child: Row(
-            children: [
-              Expanded( //Complete task button
-                flex: 1,
-                child: SizedBox(
-                  height: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+            child: Row(
+              children: [
+                Expanded( //Task Name
+                  flex: 5,
                   child: TextButton(
-                    onPressed:  () => {
-                      print('complete button')
+                    onPressed: () => {
+                      print('task button')
                     },
-                    child: const Icon(
-                      Icons.radio_button_unchecked,
-                      color: Colors.white,
-                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          title,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Expanded(child: Container())
+                      ],
+                    )
                   ),
                 ),
-              ),
-              Expanded( //Task Name
-                flex: 5,
-                child: TextButton(
-                  onPressed: () => {
-                    print('task button')
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        title,
-                        textAlign: TextAlign.left,
+                Expanded( //Points
+                  flex: 1,
+                  child: SizedBox(
+                    height: double.infinity,
+                    child: Center(
+                      child: Text(points.toString(), //TODO: the text needs to be right aligned or i could limit characters in the taskform input or make enum presets only
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 89, 204, 141),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Expanded(child: Container())
-                    ],
-                  )
-                ),
-              ),
-              Expanded( //Points
-                flex: 1,
-                child: SizedBox(
-                  height: double.infinity,
-                  child: Center(
-                    child: Text(points.toString(), //TODO: the text needs to be right aligned or i could limit characters in the taskform input or make enum presets only
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 89, 204, 141),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

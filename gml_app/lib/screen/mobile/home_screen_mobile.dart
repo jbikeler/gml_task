@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gml_app/data/database.dart';
 import 'package:gml_app/providers/tasks_provider.dart';
 import 'package:gml_app/providers/user_provider.dart';
 import 'package:gml_app/widgets/dev_menu.dart';
@@ -108,7 +109,7 @@ class HomeMobile extends StatelessWidget {
         child: SizedBox(
           height: 60.0,
           child: Row(
-//START Tasks Button
+//START Task Page Button
             children: [
               SizedBox(
                 height: 40,
@@ -118,16 +119,16 @@ class HomeMobile extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.done_all,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 89, 204, 141),
                     size: 40,
                   ),
                 ),
               ),
-//END Tasks Button
+//END Task Page Button
               const SizedBox(
                 width: 20,
               ),
-//START Goals Button
+//START Goal Page Button
               SizedBox(
                 height: 40,
                 width: 40,
@@ -143,31 +144,31 @@ class HomeMobile extends StatelessWidget {
                   ),
                 ),
               ),
-//END Goals Button
+//END Goal Page Button
               const SizedBox(
                 width: 60,
               ),
 //START Dev Menu
-              SizedBox(
-                height: 40,
-                width: 40,
-                child: IconButton(
-                  padding: const EdgeInsets.all(0.0),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return DevMenu();
-                      }
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.developer_mode,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 40,
+              //   width: 40,
+              //   child: IconButton(
+              //     padding: const EdgeInsets.all(0.0),
+              //     onPressed: () {
+              //       showDialog(
+              //         context: context,
+              //         builder: (BuildContext context) {
+              //           return DevMenu();
+              //         }
+              //       );
+              //     },
+              //     icon: const Icon(
+              //       Icons.developer_mode,
+              //       color: Colors.white,
+              //       size: 40,
+              //     ),
+              //   ),
+              // ),
 //END Dev Menu
             ],
           )

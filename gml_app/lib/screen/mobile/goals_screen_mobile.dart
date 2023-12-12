@@ -122,7 +122,7 @@ class GoalsMobile extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.stars,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 89, 204, 141),
                     size: 40,
                   ),
                 ),
