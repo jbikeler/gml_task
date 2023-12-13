@@ -11,7 +11,6 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider()),
         Provider.value(value: AppDatabase()),
         ChangeNotifierProxyProvider<AppDatabase, TasksProvider>(
           create: (context) => TasksProvider(),

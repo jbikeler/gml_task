@@ -36,11 +36,9 @@ class GoalsProvider extends ChangeNotifier {
       points: drift.Value(points),
     );
     _appDb?.addGoal(newGoal);
-    notifyListeners();
   }
 
   void deleteGoal(int goalId) {
       _appDb?.deleteGoal(goalId);
-      notifyListeners();
   }
 }

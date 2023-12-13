@@ -36,11 +36,9 @@ class TasksProvider extends ChangeNotifier {
       points: drift.Value(points),
     );
     _appDb?.addTask(newTask);
-    notifyListeners();
   }
 
   void deleteTask(int taskId) {
       _appDb?.deleteTask(taskId);
-      notifyListeners();
   }
 }

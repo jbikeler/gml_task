@@ -149,26 +149,26 @@ class HomeMobile extends StatelessWidget {
                 width: 60,
               ),
 //START Dev Menu
-              SizedBox(
-                height: 40,
-                width: 40,
-                child: IconButton(
-                  padding: const EdgeInsets.all(0.0),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return DevMenu();
-                      }
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.developer_mode,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 40,
+              //   width: 40,
+              //   child: IconButton(
+              //     padding: const EdgeInsets.all(0.0),
+              //     onPressed: () {
+              //       showDialog(
+              //         context: context,
+              //         builder: (BuildContext context) {
+              //           return DevMenu();
+              //         }
+              //       );
+              //     },
+              //     icon: const Icon(
+              //       Icons.developer_mode,
+              //       color: Colors.white,
+              //       size: 40,
+              //     ),
+              //   ),
+              // ),
 //END Dev Menu
             ],
           )
