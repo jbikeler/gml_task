@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:gml_app/data/database.dart';
-import 'package:gml_app/providers/tasks_provider.dart';
+import 'package:gml_app/providers/goals_provider.dart';
 import 'package:gml_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-class TaskCard extends StatelessWidget {
-  
-  TaskItem taskData;
-  int taskWidgetId;
+class GoalCard extends StatelessWidget {
+
+  GoalItem goalData;
+  int goalWidgetId = 0;
   
   // String title = "";
   // int points = 0;
   
-  TaskCard({super.key, required this.taskData, required this.taskWidgetId });
+  GoalCard({super.key,required this.goalData, required this.goalWidgetId});
 
   @override
   Widget build(BuildContext context) {
+    //check to see if user has enough points to spend on goal
+    bool canDissmiss = (Provider.of<UserProvider>(context).userPoints >= goalData.points) ? true : false;
     return Dismissible(
         onDismissed: (direction) {
           if (direction == DismissDirection.startToEnd){
-            context.read<UserProvider>().addPoints(taskData.points);
-            context.read<TasksProvider>().deleteTask(taskData.id);
+            context.read<UserProvider>().removePoints(goalData.points);
+            context.read<GoalsProvider>().deleteGoal(goalData.id);
           }
           else {
-            context.read<TasksProvider>().deleteTask(taskData.id);
+            context.read<GoalsProvider>().deleteGoal(goalData.id);
           }
-
         },
-        key: UniqueKey(),
+        //if the user does not have enough point lock the dissmiss direction so they cant delete goal
+        direction: (canDissmiss) ? DismissDirection.horizontal : DismissDirection.endToStart,
 // START Dismissable Background Widget
         background: Container(
           decoration: const BoxDecoration(
@@ -40,7 +42,7 @@ class TaskCard extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Icon(Icons.add,
+              Icon(Icons.remove,
               color: Colors.white,
               ),
               Text("POINTS",
@@ -87,7 +89,7 @@ class TaskCard extends StatelessWidget {
           ),
         ),
 // END Dismissable Secondary Background Widget
-// START Dismissable Main Widget
+        key: UniqueKey(),
         child: Container(
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -107,7 +109,7 @@ class TaskCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          taskData.title,
+                          goalData.title,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                             color: Colors.white,
@@ -123,7 +125,7 @@ class TaskCard extends StatelessWidget {
                   child: SizedBox(
                     height: double.infinity,
                     child: Center(
-                      child: Text(taskData.points.toString(),
+                      child: Text(goalData.points.toString(),
                         style: const TextStyle(
                           color: Color.fromARGB(255, 89, 204, 141),
                           fontSize: 18,
@@ -137,7 +139,6 @@ class TaskCard extends StatelessWidget {
             ),
           ),
         ),
-// END Dismissable Main Widget
       );
   }
 }

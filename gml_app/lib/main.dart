@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:gml_app/data/database.dart';
+import 'package:gml_app/providers/goals_provider.dart';
 import 'package:gml_app/providers/tasks_provider.dart';
+import 'package:gml_app/providers/user_provider.dart';
 import 'package:gml_app/screen/mobile/goals_screen_mobile.dart';
 import 'package:gml_app/screen/mobile/home_screen_mobile.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => TasksProvider(),
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        Provider.value(value: AppDatabase()),
+        ChangeNotifierProxyProvider<AppDatabase, TasksProvider>(
+          create: (context) => TasksProvider(),
+          update: (context, db, notifier) => notifier!..initAppDb(db)..getTasksStream(),
+        ),
+        ChangeNotifierProxyProvider<AppDatabase, GoalsProvider>(
+          create: (context) => GoalsProvider(),
+          update: (context, db, notifier) => notifier!..initAppDb(db)..getGoalsStream(),
+        ),
+        ChangeNotifierProxyProvider<AppDatabase, UserProvider>(
+          create: (context) => UserProvider(),
+          update: (context, db, notifier) => notifier!..initAppDb(db)..getPointsStream(),
+        ),
+      ],
     child: const MyApp()
   ));
 }

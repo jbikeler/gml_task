@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gml_app/providers/tasks_provider.dart';
-import 'package:gml_app/widgets/mobile/taskcard_widget_mobile.dart';
-import 'package:gml_app/widgets/mobile/taskform_widget_mobile.dart';
+import 'package:gml_app/providers/goals_provider.dart';
+import 'package:gml_app/providers/user_provider.dart';
+import 'package:gml_app/widgets/mobile/goalcard_widget_mobile.dart';
+import 'package:gml_app/widgets/mobile/goalform_widget_mobile.dart';
 import 'package:provider/provider.dart';
 
 class GoalsMobile extends StatelessWidget {
@@ -11,14 +12,14 @@ class GoalsMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('G O A L S',
+        title: const Text('G O A L S',
         style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 17, 3, 24),
       ),
       backgroundColor: const Color.fromARGB(255, 17, 3, 24),
-      body: const SafeArea(
+      body: SafeArea(
         child: Column(
           children: [
             SizedBox(
@@ -28,38 +29,41 @@ class GoalsMobile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.stars,
+                    const Icon(Icons.stars,
                     color: Colors.amber,
                     size: 40,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text("POINTS:",
+                    const Text("POINTS:",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text("125",
-                      style: TextStyle(
-                        color: Colors.amber,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold
+                    //Points amount
+                    Consumer<UserProvider>(
+                      builder: (context, value, child) => Text(value.userPoints.toString(),
+                        style: const TextStyle(
+                          color: Colors.amber,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            Expanded(
+            const Expanded(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: TaskList(),
+                child: GoalList(),
               )
             ),
           ]
@@ -74,7 +78,7 @@ class GoalsMobile extends StatelessWidget {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return TaskForm();
+                return GoalForm();
               });
           },
           backgroundColor: const Color.fromARGB(255, 89, 204, 141),
@@ -118,7 +122,7 @@ class GoalsMobile extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.stars,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 89, 204, 141),
                     size: 40,
                   ),
                 ),
@@ -132,14 +136,14 @@ class GoalsMobile extends StatelessWidget {
 }
 
 
-class TaskList extends StatelessWidget {
-  const TaskList({super.key});
+class GoalList extends StatelessWidget {
+  const GoalList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TasksProvider>(builder: (context, value, child) => ListView.separated(
-      itemCount: value.tasklist.length,
-      itemBuilder: (context, index) => TaskCard(taskId: index, title: value.tasklist[index].title, points: value.tasklist[index].points,),
+    return Consumer<GoalsProvider>(builder: (context, value, child) => ListView.separated(
+      itemCount: value.goalListStream.length,
+      itemBuilder: (context, index) => GoalCard(goalData: value.goalListStream[index], goalWidgetId: index),
       separatorBuilder: (BuildContext context, int index) => const SizedBox(
         height: 8.0,
       ),
