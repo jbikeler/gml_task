@@ -22,7 +22,7 @@ class DevMenu extends StatelessWidget {
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.amber,
                   ),
-                  onPressed: (){print(value.points);},
+                  onPressed: (){print(value.userPoints);},
                   child: const Text('Get Points',
                     style: TextStyle(color: Colors.white),
                   )
@@ -33,7 +33,7 @@ class DevMenu extends StatelessWidget {
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.red,
                   ),
-                  onPressed: (){print(value.tasklist.length);},
+                  onPressed: (){print(value.taskListStream.length);},
                   child: const Text('Get Task Amount',
                     style: TextStyle(color: Colors.white),
                   )
@@ -44,7 +44,7 @@ class DevMenu extends StatelessWidget {
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.blue,
                   ),
-                  onPressed: (){print(value.goallist.length);},
+                  onPressed: (){print(value.goalListStream.length);},
                   child: const Text('Get Goal Amount',
                     style: TextStyle(color: Colors.white),
                   )

@@ -48,7 +48,7 @@ class GoalsMobile extends StatelessWidget {
                     ),
                     //Points amount
                     Consumer<UserProvider>(
-                      builder: (context, value, child) => Text(value.points.toString(),
+                      builder: (context, value, child) => Text(value.userPoints.toString(),
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 30,
@@ -142,8 +142,8 @@ class GoalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GoalsProvider>(builder: (context, value, child) => ListView.separated(
-      itemCount: value.goallist.length,
-      itemBuilder: (context, index) => GoalCard(goalId: index, title: value.goallist[index].title, points: value.goallist[index].points,),
+      itemCount: value.goalListStream.length,
+      itemBuilder: (context, index) => GoalCard(goalData: value.goalListStream[index], goalWidgetId: index),
       separatorBuilder: (BuildContext context, int index) => const SizedBox(
         height: 8.0,
       ),

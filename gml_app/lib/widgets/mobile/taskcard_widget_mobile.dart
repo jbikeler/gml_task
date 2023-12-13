@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:gml_app/data/database.dart';
 import 'package:gml_app/providers/tasks_provider.dart';
 import 'package:gml_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class TaskCard extends StatelessWidget {
   
-
-  int taskId = 0;
-  String title = "";
-  int points = 0;
+  TaskItem taskData;
+  int taskWidgetId;
   
-  TaskCard({super.key, required this.taskId, required this.title, required this.points});
+  // String title = "";
+  // int points = 0;
+  
+  TaskCard({super.key, required this.taskData, required this.taskWidgetId });
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
         onDismissed: (direction) {
           if (direction == DismissDirection.startToEnd){
-            context.read<UserProvider>().addPoints(points);
-            context.read<TasksProvider>().deleteTask(taskId);
+            context.read<UserProvider>().addPoints(taskData.points);
+            context.read<TasksProvider>().deleteTask(taskData.id);
           }
           else {
-            context.read<TasksProvider>().deleteTask(taskId);
+            context.read<TasksProvider>().deleteTask(taskData.id);
           }
 
         },
@@ -105,7 +107,7 @@ class TaskCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          title,
+                          taskData.title,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                             color: Colors.white,
@@ -121,7 +123,7 @@ class TaskCard extends StatelessWidget {
                   child: SizedBox(
                     height: double.infinity,
                     child: Center(
-                      child: Text(points.toString(),
+                      child: Text(taskData.points.toString(),
                         style: const TextStyle(
                           color: Color.fromARGB(255, 89, 204, 141),
                           fontSize: 18,

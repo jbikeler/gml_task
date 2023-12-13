@@ -55,7 +55,7 @@ class HomeMobile extends StatelessWidget {
                     ),
                     //Points amount
                     Consumer<UserProvider>(
-                      builder: (context, value, child) => Text(value.points.toString(),
+                      builder: (context, value, child) => Text(value.userPoints.toString(),
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 30,
@@ -149,26 +149,26 @@ class HomeMobile extends StatelessWidget {
                 width: 60,
               ),
 //START Dev Menu
-              // SizedBox(
-              //   height: 40,
-              //   width: 40,
-              //   child: IconButton(
-              //     padding: const EdgeInsets.all(0.0),
-              //     onPressed: () {
-              //       showDialog(
-              //         context: context,
-              //         builder: (BuildContext context) {
-              //           return DevMenu();
-              //         }
-              //       );
-              //     },
-              //     icon: const Icon(
-              //       Icons.developer_mode,
-              //       color: Colors.white,
-              //       size: 40,
-              //     ),
-              //   ),
-              // ),
+              SizedBox(
+                height: 40,
+                width: 40,
+                child: IconButton(
+                  padding: const EdgeInsets.all(0.0),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return DevMenu();
+                      }
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.developer_mode,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                ),
+              ),
 //END Dev Menu
             ],
           )
@@ -186,8 +186,8 @@ class TaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TasksProvider>(builder: (context, value, child) => ListView.separated(
-      itemCount: value.tasklist.length,
-      itemBuilder: (context, index) => TaskCard(taskId: index, title: value.tasklist[index].title, points: value.tasklist[index].points,),
+      itemCount: value.taskListStream.length,
+      itemBuilder: (context, index) => TaskCard(taskWidgetId: index, taskData: value.taskListStream[index],),
       separatorBuilder: (BuildContext context, int index) => const SizedBox(
         height: 8.0,
       ),

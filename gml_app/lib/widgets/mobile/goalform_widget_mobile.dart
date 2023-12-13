@@ -10,7 +10,7 @@ class GoalForm extends StatelessWidget {
   final pointsController = TextEditingController();
 
   void createGoal(BuildContext context){
-    context.read<GoalsProvider>().addGoal(nameController.text, int.parse(pointsController.text));
+    context.read<GoalsProvider>().addGoal((nameController.text != '') ? nameController.text : 'New Goal', (pointsController.text != '') ? int.parse(pointsController.text) : 10 ); //if either of the inputs are empty just fill in defaults
     Navigator.of(context).pop();
     nameController.clear();
     pointsController.clear();
@@ -31,6 +31,7 @@ class GoalForm extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: "Goal Name",
                   icon: Icon(Icons.task),
+                  hintText: 'New Goal',
                 ),
               ),
               TextFormField(
@@ -38,6 +39,7 @@ class GoalForm extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: "Points",
                   icon: Icon(Icons.star),
+                  hintText: '10',
                 ),
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.number,

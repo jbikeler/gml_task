@@ -11,12 +11,19 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => TasksProvider()),
-        ChangeNotifierProvider(create: (_) => GoalsProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
-        Provider(
-          create: (_) => AppDatabase(),
-          dispose: (context, AppDatabase db) => db.close(),
+        Provider.value(value: AppDatabase()),
+        ChangeNotifierProxyProvider<AppDatabase, TasksProvider>(
+          create: (context) => TasksProvider(),
+          update: (context, db, notifier) => notifier!..initAppDb(db)..getTasksStream(),
+        ),
+        ChangeNotifierProxyProvider<AppDatabase, GoalsProvider>(
+          create: (context) => GoalsProvider(),
+          update: (context, db, notifier) => notifier!..initAppDb(db)..getGoalsStream(),
+        ),
+        ChangeNotifierProxyProvider<AppDatabase, UserProvider>(
+          create: (context) => UserProvider(),
+          update: (context, db, notifier) => notifier!..initAppDb(db)..getPointsStream(),
         ),
       ],
     child: const MyApp()
