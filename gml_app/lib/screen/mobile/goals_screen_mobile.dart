@@ -10,6 +10,9 @@ class GoalsMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Color themeColor = Color.fromARGB(255, 89, 204, 141);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('G O A L S',
@@ -69,68 +72,101 @@ class GoalsMobile extends StatelessWidget {
           ]
         ),
       ),
-      floatingActionButton: SizedBox(
-        height: 70,
-        width: 70,
-        child: FloatingActionButton(
-          shape: const CircleBorder(),
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return GoalForm();
-              });
-          },
-          backgroundColor: const Color.fromARGB(255, 89, 204, 141),
-          child: const Icon(
-            Icons.add,
-            size: 35,
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 23, 20, 44),
-        shape: const CircularNotchedRectangle(),
-        child: SizedBox(
-          height: 60.0,
-          child: Row(
-            children: [
-              SizedBox(
-                height: 40,
-                width: 40,
-                child: IconButton(
-                  padding: const EdgeInsets.all(0.0),
+//START Action Button
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SizedBox(
+              height: 50,
+              width: 50,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: themeColor,
+                  shape: const CircleBorder(),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, "/");
+                },
+                child: const Icon(Icons.done_all,
+                  color: Color.fromARGB(255, 17, 3, 24),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+              child: SizedBox(
+                height: 70,
+                width: 70,
+                child: FloatingActionButton(
+                  shape: const CircleBorder(),
                   onPressed: () {
-                    Navigator.pop(context);
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return GoalForm();
+                        });
                   },
-                  icon: const Icon(
-                    Icons.done_all,
-                    color: Colors.white,
-                    size: 40,
+                  backgroundColor: themeColor,
+                  child: const Icon(
+                    Icons.add,
+                    size: 35,
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 20,
-              ),
-              SizedBox(
-                height: 40,
-                width: 40,
-                child: IconButton(
-                  padding: const EdgeInsets.all(0.0),
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.stars,
-                    color: Color.fromARGB(255, 89, 204, 141),
-                    size: 40,
-                  ),
-                ),
-              ),
-            ],
-          )
-        )
-      )
+            ),
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
+//END Action Button
+//START Bottom Nav
+      // bottomNavigationBar: BottomAppBar(
+      //   color: const Color.fromARGB(255, 23, 20, 44),
+      //   shape: const CircularNotchedRectangle(),
+      //   child: SizedBox(
+      //     height: 60.0,
+      //     child: Row(
+      //       children: [
+      //         const SizedBox(
+      //           width: 10,
+      //         ),
+      //         SizedBox(
+      //           height: 30,
+      //           width: 30,
+      //           child: IconButton(
+      //             padding: const EdgeInsets.all(0.0),
+      //             onPressed: () {
+      //               Navigator.pop(context);
+      //             },
+      //             icon: const Icon(
+      //               Icons.done_all,
+      //               color: Colors.white,
+      //               size: 30,
+      //             ),
+      //           ),
+      //         ),
+      //         const SizedBox(
+      //           width: 20,
+      //         ),
+      //         SizedBox(
+      //           height: 30,
+      //           width: 30,
+      //           child: IconButton(
+      //             padding: const EdgeInsets.all(0.0),
+      //             onPressed: () {},
+      //             icon: const Icon(
+      //               Icons.stars,
+      //               color: Color.fromARGB(255, 89, 204, 141),
+      //               size: 30,
+      //             ),
+      //           ),
+      //         ),
+      //       ],
+      //     )
+      //   )
+      // )
     );
   }
 }

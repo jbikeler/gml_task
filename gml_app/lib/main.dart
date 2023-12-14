@@ -7,7 +7,8 @@ import 'package:gml_app/screen/mobile/goals_screen_mobile.dart';
 import 'package:gml_app/screen/mobile/home_screen_mobile.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+
   runApp(
     MultiProvider(
       providers: [

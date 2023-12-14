@@ -127,7 +127,7 @@ class GoalCard extends StatelessWidget {
                     child: Center(
                       child: Text(goalData.points.toString(),
                         style: const TextStyle(
-                          color: Color.fromARGB(255, 89, 204, 141),
+                          color: Colors.red,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),

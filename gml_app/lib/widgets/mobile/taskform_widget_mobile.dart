@@ -37,6 +37,9 @@ class TaskForm extends StatelessWidget {
                   icon: Icon(Icons.task),
                   hintText: 'New Task',
                 ),
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(18),
+                ],
               ),
               TextFormField(
                 controller: pointsController,

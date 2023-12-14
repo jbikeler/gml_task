@@ -33,6 +33,9 @@ class GoalForm extends StatelessWidget {
                   icon: Icon(Icons.task),
                   hintText: 'New Goal',
                 ),
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(18),
+                ],
               ),
               TextFormField(
                 controller: pointsController,

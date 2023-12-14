@@ -25,11 +25,12 @@ class UserProvider extends ChangeNotifier {
   int _userPoints = 0;
   int get userPoints => _userPoints;
 
-  void getPointsStream() {
+  void getPointsStream() async {
+    await Future.delayed(const Duration(seconds: 2));
     _appDb?.getUserPointsStream()
       .listen((event) {
          //get the list of entries(which should only be one item at key:1 or in a list, the first item)
-         //and set the _userpoints to watch the first entry for changes 
+         //and set the _userpoints to watch the first entry for changes
         _userPoints = event[0].points;
         notifyListeners();
       }); 
